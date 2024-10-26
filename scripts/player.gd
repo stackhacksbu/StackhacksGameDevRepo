@@ -1,11 +1,15 @@
 extends CharacterBody2D
-
+class_name Player
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
-const DASH_VELOCITY = 50000
+const DASH_VELOCITY = 300
+var tween: Tween
+var dash_velocity := 0.0
+var target = position
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@export var ability: Ability
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -14,13 +18,18 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		ability.use_ability(self)
+	
+	# Handle Dash.
+	if Input.is_action_just_pressed("dash"):
+		dash_velocity = DASH_VELOCITY
+		if tween:
+			tween.stop()
+		tween = create_tween()
+		tween.tween_property(self, "dash_velocity", 0, 0.3).set_ease(Tween.EASE_OUT)
 		
-
-
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction = Input.get_axis("move_left", "move_right")
 	
 	if direction > 0:
 		animated_sprite.flip_h = false;
@@ -28,7 +37,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true;
 	
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * (SPEED + dash_velocity)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
