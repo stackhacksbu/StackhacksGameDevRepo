@@ -7,7 +7,6 @@ const JUMP_VELOCITY = -300.0
 const MAX_JUMPS = 2
 
 # variables
-
 # current number of jumps
 var jump_count = 0
 # hashmap/dictionary of our character's abilities
