@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://besm0lkf1jww8"]
 
 [ext_resource type="PackedScene" uid="uid://dhr6vs5bxmd2f" path="res://scenes/player.tscn" id="1_ucb25"]
+[ext_resource type="Texture2D" uid="uid://ctjow8vmb4k5v" path="res://assets/sprites/world_tileset.png" id="2_lbvig"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_do8s8"]
 
