@@ -2,11 +2,12 @@ extends CharacterBody2D
 class_name Player
 
 # constants
-const SPEED = 130.0
-const JUMP_VELOCITY = -300.0
 const MAX_JUMPS = 2
 
 # variables
+var speed = 130.0
+var jump_velocity = -300.0
+
 # current number of jumps
 var jump_count = 0
 # hashmap/dictionary of our character's abilities
@@ -19,6 +20,7 @@ func _ready() -> void:
 	# load in abilities
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
+	abilities["arcaneadrenaline"] = load("res://scripts/movement/arcaneadrenaline.gd").new()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -35,12 +37,15 @@ func _physics_process(delta: float) -> void:
 
 		# jump normally from floor
 		if Input.is_action_just_pressed("jump"):
-			velocity.y = JUMP_VELOCITY
+			velocity.y = jump_velocity
 			jump_count += 1
 	
 	# Handle Dash.
 	if Input.is_action_just_pressed("dash"):
 		cast("dash")
+		
+	if Input.is_action_just_pressed("arcaneadrenaline"):
+		cast("arcaneadrenaline")
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
@@ -51,9 +56,9 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true;
 	
 	if direction:
-		velocity.x = direction * (SPEED)
+		velocity.x = direction * (speed)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
 
@@ -62,3 +67,4 @@ func cast(ability_name) -> void:
 	# cast ability based on name
 	if abilities.has(ability_name):
 		abilities[ability_name].use_ability(self);
+		
