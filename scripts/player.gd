@@ -19,6 +19,7 @@ func _ready() -> void:
 	# load in abilities
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
+	abilities["suspend"] = load("res://scripts/suspend.gd").new()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -37,6 +38,17 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
+			
+	
+		
+	
+		# Normal gravity handling when not hovering
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
+	# Rest of the movement and ability logic...
+	if Input.is_action_just_pressed("suspension"):  # Add a new input for "hover"
+		cast("suspend")
 	
 	# Handle Dash.
 	if Input.is_action_just_pressed("dash"):
@@ -56,6 +68,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
+
 
 # function for using abilities
 func cast(ability_name) -> void:
