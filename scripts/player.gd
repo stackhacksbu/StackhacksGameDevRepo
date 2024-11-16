@@ -13,13 +13,20 @@ var jump_count = 0
 var abilities = {}
 # sprite associated with this node
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+#sprite associated with health bar
+@onready var health_bar: ProgressBar = $HealthBar
+#health 
+var hp = 100
+
+
 
 # runs on node's creation
 func _ready() -> void:
 	# load in abilities
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
-
+	health_bar.value = hp
+	
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		# handle gravity.
@@ -62,3 +69,14 @@ func cast(ability_name) -> void:
 	# cast ability based on name
 	if abilities.has(ability_name):
 		abilities[ability_name].use_ability(self);
+		
+func add_health(amount):
+	hp += amount
+	hp = clamp(hp,0, 100)
+	print("Player HP:", hp)
+	health_bar.value = hp
+
+func subtract_health(amount):
+	hp -= amount
+	hp = clamp(hp,0, 100)
+	health_bar.value = hp
