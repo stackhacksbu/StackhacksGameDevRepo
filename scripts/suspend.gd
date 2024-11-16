@@ -1,21 +1,34 @@
 extends Ability
 class_name Suspend
 
-
-var hover_time: float = 2.0  # in seconds
-var is_hovering: bool = false
-var hover_timer: float = 0.0
+# Store the player as an instance variable so timeout can reference it
+var target_player: Player
+var original_velocity_y: float
 
 func use_ability(player: Player) -> void:
-	if not is_hovering:
-		is_hovering = true
-		hover_timer = hover_time
-		player.velocity.y = 0  # Stop vertical movement
-		print("Hover activated")
+	# Update instance variables
+	target_player = player
+	original_velocity_y = player.velocity.y
+	
+	# Effect: Stop vertical movement and start hover timer
+	player.velocity.y = 0  # Stop vertical movement
+	print("Hover activated")
 
-func process_hover(player: Player, delta: float) -> void:
-	if is_hovering:
-		hover_timer -= delta
-		if hover_timer <= 0:
-			is_hovering = false  # End the hovering state
-			print("Hover ended")
+	# Set the player's is_hovering state to true
+	player.is_hovering = true
+
+	# Create and configure the timer for hover duration
+	var hover_timer = Timer.new()
+	hover_timer.wait_time = 2.0  # Set the hover duration (in seconds)
+	hover_timer.one_shot = true  # Timer should only run once
+	hover_timer.connect("timeout", Callable(self, "_on_hover_timeout"))
+	
+	# Add the timer to the player's scene tree and start it
+	player.add_child(hover_timer)
+	hover_timer.start()
+
+func _on_hover_timeout() -> void:
+	# Reset the vertical velocity and end the hover effect
+	target_player.velocity.y = original_velocity_y
+	target_player.is_hovering = false  # Set the player's hover state back to false
+	print("Hover ended")

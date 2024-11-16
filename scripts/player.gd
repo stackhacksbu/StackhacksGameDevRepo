@@ -7,12 +7,10 @@ const JUMP_VELOCITY = -300.0
 const MAX_JUMPS = 2
 
 # variables
-# current number of jumps
-var jump_count = 0
-# hashmap/dictionary of our character's abilities
-var abilities = {}
-# sprite associated with this node
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+var jump_count = 0  # current number of jumps
+var abilities = {}  # hashmap/dictionary of our character's abilities
+var is_hovering = false  # Add this variable to track hovering state
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D  # sprite associated with this node
 
 # runs on node's creation
 func _ready() -> void:
@@ -22,57 +20,49 @@ func _ready() -> void:
 	abilities["suspend"] = load("res://scripts/suspend.gd").new()
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		# handle gravity.
+	# Apply gravity when not on the floor and not hovering
+	if not is_on_floor() and not is_hovering:
 		velocity += get_gravity() * delta
 
-		# only double jump when not on floor (or else character gets 2 jumps from falling state)
-		if Input.is_action_just_pressed("jump") and jump_count < MAX_JUMPS:
-			cast("doublejump")
-
+	# Handle normal jump logic
 	if is_on_floor():
-		# reset double jump
-		jump_count = 0
+		jump_count = 0  # reset jump count when on the floor
 
-		# jump normally from floor
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
-			
-	
-		
-	
-		# Normal gravity handling when not hovering
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	
-	# Rest of the movement and ability logic...
-	if Input.is_action_just_pressed("suspension"):  # Add a new input for "hover"
+
+	# Handle double jump logic
+	elif Input.is_action_just_pressed("jump") and jump_count < MAX_JUMPS and not is_hovering:
+		velocity.y = JUMP_VELOCITY  # apply the jump velocity for double jump
+		jump_count += 1  # increment jump count
+		cast("doublejump")
+
+	# Trigger Suspend ability (only trigger once)
+	if Input.is_action_just_pressed("suspension") and not is_hovering:
 		cast("suspend")
-	
-	# Handle Dash.
+
+	# Handle Dash ability
 	if Input.is_action_just_pressed("dash"):
 		cast("dash")
 
-	# Get the input direction and handle the movement/deceleration.
+	# Get the input direction and handle movement/deceleration
 	var direction = Input.get_axis("move_left", "move_right")
-	
+
 	if direction > 0:
-		animated_sprite.flip_h = false;
+		animated_sprite.flip_h = false
 	elif direction < 0:
-		animated_sprite.flip_h = true;
-	
+		animated_sprite.flip_h = true
+
 	if direction:
-		velocity.x = direction * (SPEED)
+		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-	
-
 
 # function for using abilities
 func cast(ability_name) -> void:
 	# cast ability based on name
 	if abilities.has(ability_name):
-		abilities[ability_name].use_ability(self);
+		abilities[ability_name].use_ability(self)
