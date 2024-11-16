@@ -21,6 +21,7 @@ func _ready() -> void:
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
 	abilities["arcaneadrenaline"] = load("res://scripts/movement/arcaneadrenaline.gd").new()
+	abilities["fireball"] = load("res://scripts/fireball.gd").new()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -46,6 +47,9 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("arcaneadrenaline"):
 		cast("arcaneadrenaline")
+		
+	if Input.is_action_just_pressed("fireball"):
+		cast("fireball")
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
@@ -67,4 +71,5 @@ func cast(ability_name) -> void:
 	# cast ability based on name
 	if abilities.has(ability_name):
 		abilities[ability_name].use_ability(self);
+		
 		
