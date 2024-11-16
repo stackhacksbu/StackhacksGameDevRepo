@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbckirhjxsx80"]
+
+[ext_resource type="Texture2D" uid="uid://d3r4del88mkda" path="res://icon.svg" id="1_8r0vl"]
+[ext_resource type="Script" path="res://scripts/add_ability.gd" id="1_dftis"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_go0on"]
+size = Vector2(25, 25)
+
+[node name="add_ability" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_dftis")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8r0vl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.588887, 0.333335)
+scale = Vector2(5.18222, -4.62887)
+shape = SubResource("RectangleShape2D_go0on")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -81.0
+offset_top = -90.0
+offset_right = 98.0
+offset_bottom = -62.0
+text = "Double Jump Upgrade"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

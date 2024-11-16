@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://besm0lkf1jww8"]
+[gd_scene load_steps=7 format=4 uid="uid://besm0lkf1jww8"]
 
 [ext_resource type="PackedScene" uid="uid://dhr6vs5bxmd2f" path="res://scenes/player.tscn" id="1_ucb25"]
 [ext_resource type="Texture2D" uid="uid://ctjow8vmb4k5v" path="res://assets/sprites/world_tileset.png" id="2_lbvig"]
+[ext_resource type="PackedScene" uid="uid://cbckirhjxsx80" path="res://scenes/add_ability.tscn" id="3_kalvd"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_do8s8"]
 
@@ -177,3 +178,7 @@ shape = SubResource("WorldBoundaryShape2D_do8s8")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD6/wEAAQAAAAAAAAD7/wEAAQAAAAAAAAD8/wEAAQAAAAAAAAD9/wEAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD4/wIAAQAAAAAAAAD3/wIAAQAAAAAAAAD3/wMAAQAAAAAAAAD2/wMAAQAAAAAAAAD1/wMAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAAJAAIAAQAAAAAAAAALAAMAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_ppitl")
+
+[node name="add_ability" parent="." instance=ExtResource("3_kalvd")]
+position = Vector2(69, -4)
+scale = Vector2(0.2, 0.2)

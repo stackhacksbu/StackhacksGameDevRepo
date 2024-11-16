@@ -17,7 +17,7 @@ var abilities = {}
 # runs on node's creation
 func _ready() -> void:
 	# load in abilities
-	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
+	#abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
 
 func _physics_process(delta: float) -> void:
