@@ -24,10 +24,8 @@ func _ready() -> void:
 	abilities["fireball"] = load("res://scripts/fireball.gd").new()
 
 func _draw():
-	draw_circle(position, 5, Color(1, 0, 0)) # Red circle
-	draw_line(position, get_global_mouse_position(), Color(0, 1, 0)) # Green line
-	draw_circle($AnimatedSprite2D.global_position, 5, Color(0, 0, 1))  # Sprite position
-
+	draw_circle(Vector2(0,0), 5, Color(1, 0, 0)) # Red circle
+	draw_line(Vector2(0,0), get_global_mouse_position()-position, Color(0, 1, 0)) # Green line
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

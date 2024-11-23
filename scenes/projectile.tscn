@@ -10,11 +10,9 @@ collision_layer = 0
 script = ExtResource("1_5m414")
 
 [node name="Fireball" type="Sprite2D" parent="."]
-position = Vector2(0.16, -1.81)
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("2_vrus0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.16, -1.81)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_1jn5a")
