@@ -23,6 +23,12 @@ func _ready() -> void:
 	abilities["arcaneadrenaline"] = load("res://scripts/movement/arcaneadrenaline.gd").new()
 	abilities["fireball"] = load("res://scripts/fireball.gd").new()
 
+func _draw():
+	draw_circle(position, 5, Color(1, 0, 0)) # Red circle
+	draw_line(position, get_global_mouse_position(), Color(0, 1, 0)) # Green line
+	draw_circle($AnimatedSprite2D.global_position, 5, Color(0, 0, 1))  # Sprite position
+
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		# handle gravity.
@@ -65,7 +71,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
-
+	queue_redraw()
 # function for using abilities
 func cast(ability_name) -> void:
 	# cast ability based on name
