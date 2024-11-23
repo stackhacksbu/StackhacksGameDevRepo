@@ -13,3 +13,7 @@ func _ready():
 func _physics_process(delta):
 	velocity = Vector2(SPEED * directionX, -SPEED * directionY)
 	move_and_slide()
+
+func _on_area_2d_body_entered(body):
+	print("HIT")
+	queue_free()

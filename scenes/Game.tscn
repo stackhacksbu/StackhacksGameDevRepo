@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://besm0lkf1jww8"]
+[gd_scene load_steps=7 format=4 uid="uid://besm0lkf1jww8"]
 
 [ext_resource type="PackedScene" uid="uid://dhr6vs5bxmd2f" path="res://scenes/player.tscn" id="1_ucb25"]
 [ext_resource type="Texture2D" uid="uid://ctjow8vmb4k5v" path="res://assets/sprites/world_tileset.png" id="2_lbvig"]
@@ -161,6 +161,8 @@ texture = ExtResource("2_lbvig")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_gb4ml")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcghj"]
+
 [node name="main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_ucb25")]
@@ -178,3 +180,10 @@ shape = SubResource("WorldBoundaryShape2D_do8s8")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD6/wEAAQAAAAAAAAD7/wEAAQAAAAAAAAD8/wEAAQAAAAAAAAD9/wEAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD4/wIAAQAAAAAAAAD3/wIAAQAAAAAAAAD3/wMAAQAAAAAAAAD2/wMAAQAAAAAAAAD1/wMAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAAJAAIAAQAAAAAAAAALAAMAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_ppitl")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(66.13, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(28.87, 7)
+shape = SubResource("RectangleShape2D_jcghj")
