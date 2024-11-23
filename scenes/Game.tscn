@@ -1,15 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://besm0lkf1jww8"]
+[gd_scene load_steps=13 format=4 uid="uid://besm0lkf1jww8"]
 
 [ext_resource type="PackedScene" uid="uid://dhr6vs5bxmd2f" path="res://scenes/player.tscn" id="1_ucb25"]
+[ext_resource type="Texture2D" uid="uid://bh4xk0ccyqp2c" path="res://assets/health bars/health_100.png" id="2_fstaj"]
 [ext_resource type="Texture2D" uid="uid://ctjow8vmb4k5v" path="res://assets/sprites/world_tileset.png" id="2_lbvig"]
 [ext_resource type="Texture2D" uid="uid://cshxdx3x1qvjl" path="res://assets/sprites/temp.png" id="3_8gr78"]
 [ext_resource type="Script" path="res://scripts/area_2d.gd" id="3_jtr68"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntods"]
-bg_color = Color(0.141036, 0.133074, 0.131641, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kq61"]
-bg_color = Color(0.869494, 0.371772, 0.384509, 1)
+[ext_resource type="Script" path="res://scenes/health_bar.gd" id="3_lha40"]
+[ext_resource type="Script" path="res://scenes/unhealth_tester.gd" id="5_j43pw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_do8s8"]
 
@@ -171,6 +168,9 @@ sources/1 = SubResource("TileSetAtlasSource_gb4ml")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xii0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6ppj"]
+size = Vector2(14, 14)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_ucb25")]
@@ -179,15 +179,15 @@ position = Vector2(0, 4)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)
 
-[node name="HealthBar" type="ProgressBar" parent="Player"]
-offset_left = 59.0
+[node name="HealthBar" type="TextureProgressBar" parent="Player"]
+modulate = Color(0.950731, 0.858025, 0.795622, 1)
+offset_left = 47.0
 offset_top = -62.0
-offset_right = 179.0
-offset_bottom = -44.0
-scale = Vector2(0.448911, 0.448911)
-theme_override_styles/background = SubResource("StyleBoxFlat_ntods")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6kq61")
-show_percentage = false
+offset_right = 175.0
+offset_bottom = -30.0
+scale = Vector2(0.528784, 0.528784)
+texture_over = ExtResource("2_fstaj")
+script = ExtResource("3_lha40")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -200,6 +200,8 @@ tile_map_data = PackedByteArray("AAD6/wEAAQAAAAAAAAD7/wEAAQAAAAAAAAD8/wEAAQAAAAA
 tile_set = SubResource("TileSet_ppitl")
 
 [node name="Health Tester" type="Area2D" parent="."]
+position = Vector2(-13, 4)
+scale = Vector2(0.804676, 0.761006)
 script = ExtResource("3_jtr68")
 
 [node name="Sprite2D" type="Sprite2D" parent="Health Tester"]
@@ -211,4 +213,18 @@ texture = ExtResource("3_8gr78")
 position = Vector2(58, 4)
 shape = SubResource("RectangleShape2D_1xii0")
 
+[node name="Unhealth tester" type="Area2D" parent="."]
+position = Vector2(40, 2)
+script = ExtResource("5_j43pw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Unhealth tester"]
+position = Vector2(-69, 8)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("3_8gr78")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Unhealth tester"]
+position = Vector2(-69, 6)
+shape = SubResource("RectangleShape2D_t6ppj")
+
 [connection signal="body_entered" from="Health Tester" to="Health Tester" method="_on_body_entered"]
+[connection signal="body_entered" from="Unhealth tester" to="Unhealth tester" method="_on_body_entered"]

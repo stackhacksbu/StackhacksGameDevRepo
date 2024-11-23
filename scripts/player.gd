@@ -14,7 +14,8 @@ var abilities = {}
 # sprite associated with this node
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 #sprite associated with health bar
-@onready var health_bar: ProgressBar = $HealthBar
+@onready var health_bar: TextureProgressBar = $HealthBar
+
 #health 
 var hp = 100
 
@@ -79,4 +80,5 @@ func add_health(amount):
 func subtract_health(amount):
 	hp -= amount
 	hp = clamp(hp,0, 100)
+	print("Player HP:", hp)
 	health_bar.value = hp

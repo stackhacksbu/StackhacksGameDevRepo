@@ -3,4 +3,4 @@ extends Area2D
 
 func _on_body_entered(body):
 	print("add_health")
-	player.subtract_health(10)
+	player.add_health(10)
