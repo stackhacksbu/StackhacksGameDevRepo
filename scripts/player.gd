@@ -20,12 +20,13 @@ func _ready() -> void:
 	# load in abilities
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
-	abilities["arcaneadrenaline"] = load("res://scripts/movement/arcaneadrenaline.gd").new()
-	abilities["fireball"] = load("res://scripts/fireball.gd").new()
+	abilities["arcaneadrenaline"] = load("res://scripts/abilities/arcaneadrenaline.gd").new()
+	abilities["fireball"] = load("res://scripts/abilities/fireball.gd").new()
 
 func _draw():
-	draw_circle(Vector2(0,0), 5, Color(1, 0, 0)) # Red circle
-	draw_line(Vector2(0,0), get_global_mouse_position()-position, Color(0, 1, 0)) # Green line
+	pass
+	#draw_circle(Vector2(0,0), 5, Color(1, 0, 0)) # Red circle
+	#draw_line(Vector2(0,0), get_global_mouse_position()-position, Color(0, 1, 0)) # Green line
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

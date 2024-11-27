@@ -1,7 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm26ynsrafj3w"]
+[gd_scene load_steps=9 format=3 uid="uid://dm26ynsrafj3w"]
 
-[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_5m414"]
-[ext_resource type="Texture2D" uid="uid://dqerywbk5fx51" path="res://assets/sprites/Fireball.png" id="2_vrus0"]
+[ext_resource type="Script" path="res://scripts/abilities/projectile.gd" id="1_5m414"]
+[ext_resource type="Texture2D" uid="uid://bn1trjvvauq2y" path="res://assets/sprites/fireballanimated.png" id="2_cs7i8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71n1b"]
+atlas = ExtResource("2_cs7i8")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwk2m"]
+atlas = ExtResource("2_cs7i8")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ws5n"]
+atlas = ExtResource("2_cs7i8")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb5vw"]
+atlas = ExtResource("2_cs7i8")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qf38k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71n1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwk2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ws5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb5vw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1jn5a"]
 
@@ -9,9 +45,14 @@
 collision_layer = 0
 script = ExtResource("1_5m414")
 
-[node name="Fireball" type="Sprite2D" parent="."]
-scale = Vector2(0.03, 0.03)
-texture = ExtResource("2_vrus0")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.25, -1)
+rotation = -1.5708
+scale = Vector2(0.14, 0.14)
+sprite_frames = SubResource("SpriteFrames_qf38k")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.7)
