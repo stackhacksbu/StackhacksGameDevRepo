@@ -12,8 +12,7 @@ func _ready():
 	global_rotation = spawnRot
 func _physics_process(delta):
 	velocity = Vector2(SPEED * directionX, -SPEED * directionY)
-	move_and_slide()
-
-func _on_area_2d_body_entered(body):
-	print("HIT")
-	queue_free()
+	var collision = move_and_collide(velocity*delta)
+	if collision:
+		print("HIT!")
+		queue_free()
