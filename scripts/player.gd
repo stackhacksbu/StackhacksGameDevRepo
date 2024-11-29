@@ -22,6 +22,7 @@ func _ready() -> void:
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
 	abilities["arcaneadrenaline"] = load("res://scripts/abilities/arcaneadrenaline.gd").new()
 	abilities["fireball"] = load("res://scripts/abilities/fireball.gd").new()
+	abilities["teleport"] = load("res://scripts/abilities/teleport.gd").new()
 
 func _draw():
 	pass
@@ -55,6 +56,9 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("fireball"):
 		cast("fireball")
+		
+	if Input.is_action_just_pressed("teleport"):
+		cast("teleport")
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")

@@ -1,22 +1,22 @@
 [gd_scene load_steps=9 format=3 uid="uid://dm26ynsrafj3w"]
 
-[ext_resource type="Script" path="res://scripts/abilities/projectile.gd" id="1_5m414"]
-[ext_resource type="Texture2D" uid="uid://bn1trjvvauq2y" path="res://assets/sprites/fireballanimated.png" id="2_cs7i8"]
+[ext_resource type="Script" path="res://scripts/fireballprojectile.gd" id="1_6tx37"]
+[ext_resource type="Texture2D" uid="uid://bn1trjvvauq2y" path="res://assets/sprites/fireballanimated.png" id="2_jv4ns"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71n1b"]
-atlas = ExtResource("2_cs7i8")
+atlas = ExtResource("2_jv4ns")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fwk2m"]
-atlas = ExtResource("2_cs7i8")
+atlas = ExtResource("2_jv4ns")
 region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ws5n"]
-atlas = ExtResource("2_cs7i8")
+atlas = ExtResource("2_jv4ns")
 region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tb5vw"]
-atlas = ExtResource("2_cs7i8")
+atlas = ExtResource("2_jv4ns")
 region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qf38k"]
@@ -43,7 +43,7 @@ animations = [{
 
 [node name="Projectile" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_5m414")
+script = ExtResource("1_6tx37")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-0.25, -1)
