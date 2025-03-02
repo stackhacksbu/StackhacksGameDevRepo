@@ -46,10 +46,11 @@ animations = [{
 script = ExtResource("1_3ovcl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -5)
 shape = SubResource("CircleShape2D_pyaji")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(2, -9)
 rotation = 0.000144011
 sprite_frames = SubResource("SpriteFrames_c4vtd")
 autoplay = "default"
