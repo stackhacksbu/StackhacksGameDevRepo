@@ -69,8 +69,10 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true;
 	
 	if direction:
+		animated_sprite.play("walk")
 		velocity.x = direction * (speed)
 	else:
+		animated_sprite.play("idle")
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
