@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dhkqf80s1rjis"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]

@@ -17,7 +17,7 @@ func _ready() -> void:
 	# load in abilities
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
-	abilities["suspend"] = load("res://scripts/suspend.gd").new()
+	abilities["suspend"] = load("res://scripts/movement/suspend.gd").new()
 
 func _physics_process(delta: float) -> void:
 	# Apply gravity when not on the floor and not hovering

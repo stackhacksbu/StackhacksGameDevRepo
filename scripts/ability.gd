@@ -8,5 +8,5 @@ class_name Ability
 #func _init() -> void:
 	#pass
 
-func use_ability(player: Player) -> void:
+func use_ability(_player: Player) -> void:
 	pass
