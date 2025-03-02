@@ -11,13 +11,16 @@ var jump_count = 0  # current number of jumps
 var abilities = {}  # hashmap/dictionary of our character's abilities
 var is_hovering = false  # Add this variable to track hovering state
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D  # sprite associated with this node
+@onready var health_bar: TextureProgressBar = $TextureProgressBar
 
+var hp = 100
 # runs on node's creation
 func _ready() -> void:
 	# load in abilities
 	abilities["doublejump"] = load("res://scripts/movement/doublejump.gd").new()
 	abilities["dash"] = load("res://scripts/movement/dash.gd").new()
 	abilities["suspend"] = load("res://scripts/suspend.gd").new()
+	health_bar.value = hp
 
 func _physics_process(delta: float) -> void:
 	# Apply gravity when not on the floor and not hovering
@@ -66,3 +69,9 @@ func cast(ability_name) -> void:
 	# cast ability based on name
 	if abilities.has(ability_name):
 		abilities[ability_name].use_ability(self)
+
+func add_health(amount):
+	hp += amount
+	clamp(hp, 0, 100)
+	print("HP: ", hp)
+	health_bar.value = hp

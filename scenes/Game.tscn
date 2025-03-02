@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://besm0lkf1jww8"]
+[gd_scene load_steps=7 format=4 uid="uid://besm0lkf1jww8"]
 
 [ext_resource type="PackedScene" uid="uid://dhr6vs5bxmd2f" path="res://scenes/player.tscn" id="1_ucb25"]
 [ext_resource type="Texture2D" uid="uid://ctjow8vmb4k5v" path="res://assets/sprites/world_tileset.png" id="2_lbvig"]
+[ext_resource type="Script" path="res://scenes/texture_progress_bar.gd" id="2_omkcx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_do8s8"]
 
@@ -166,9 +167,19 @@ sources/1 = SubResource("TileSetAtlasSource_gb4ml")
 [node name="Player" parent="." instance=ExtResource("1_ucb25")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
 zoom = Vector2(5, 5)
 
 [node name="Timer" type="Timer" parent="Player"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Player"]
+offset_left = -115.0
+offset_top = -65.0
+offset_right = -97.0
+offset_bottom = -58.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("2_omkcx")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
