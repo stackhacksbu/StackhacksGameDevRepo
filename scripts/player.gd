@@ -75,3 +75,9 @@ func add_health(amount):
 	clamp(hp, 0, 100)
 	print("HP: ", hp)
 	health_bar.value = hp
+	
+func minus_health(amount):
+	hp -= amount
+	clamp(hp, 0, 100)
+	print("HP: ", hp)
+	health_bar.value = hp
